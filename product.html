@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Market - รายละเอียดสินค้าทั้งหมด</title>
+    <link rel="stylesheet" href="external.css">
+</head>
+<body>
+    <header>
+        <h1>Student Market</h1>
+        <nav>
+            <a href="index.html">หน้าแรก</a>
+            <a href="products.html">สินค้าทั้งหมด</a>
+        </nav>
+        <form action="products.html" method="get">
+            <label>หมวดหมู่สินค้า:
+                <select name="category">
+                    <option value="">ทั้งหมด</option>
+                    <option value="book">หนังสือเรียน</option>
+                    <option value="clothing">เครื่องแต่งกาย</option>
+                    <option value="electronics">อุปกรณ์อิเล็กทรอนิกส์</option>
+                    <option value="dorm">ของใช้ในหอ</option>
+                </select>
+            </label>
+            <button type="submit">ไป</button>
+        </form>
+    </header>
+    <main>
+        <section>
+            <h2>รายละเอียดสินค้า</h2>
+            <p>หมายเหตุ: ข้อมูลทั้ง 15 รายการอยู่ในหน้านี้ทั้งหมด สามารถใช้ CSS ID (#product-1, #product-2) ในการจัดแสดงหรือซ่อนได้</p>
+
+        <article id="product-1">
+            <img src="" alt="รูปภาพหนังสือ Calculus 1 (มือสอง)" width="500" height="500">
+            <h2>หนังสือ Calculus 1 (มือสอง)</h2>
+            <p><strong>ราคา:</strong> 250 บาท</p>
+            <p><strong>หมวดหมู่:</strong> หนังสือเรียน</p>
+            <p><strong>สภาพ:</strong> พอใช้</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>2 ชั่วโมงผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> มีรอยไฮไลต์บางหน้า ไม่มีหน้าขาด ใช้งานได้ปกติ</p>
+            <p><strong>จุดนัดรับ:</strong> หน้าหอสมุด</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo01</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-2">
+            <img src="" alt="รูปภาพหนังสือ Physics 2" width="500" height="500">
+            <h2>หนังสือ Physics 2</h2>
+            <p><strong>ราคา:</strong> 200 บาท</p>
+            <p><strong>หมวดหมู่:</strong> หนังสือเรียน</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>3 ชั่วโมงผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> สภาพดีมาก แทบไม่ได้เปิดอ่าน</p>
+            <p><strong>จุดนัดรับ:</strong> ตึกคณะวิทยาศาสตร์</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo02</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-3">
+            <img src="" alt="รูปภาพหนังสือ Chemistry" width="500" height="500">
+            <h2>หนังสือ Chemistry</h2>
+            <p><strong>ราคา:</strong> 300 บาท</p>
+            <p><strong>หมวดหมู่:</strong> หนังสือเรียน</p>
+            <p><strong>สภาพ:</strong> ใหม่</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>5 ชั่วโมงผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> หนังสือใหม่ในซีล ซื้อมาซ้ำ</p>
+            <p><strong>จุดนัดรับ:</strong> โรงอาหารกลาง</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo03</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-4">
+            <img src="" alt="รูปภาพหนังสือ Biology" width="500" height="500">
+            <h2>หนังสือ Biology</h2>
+            <p><strong>ราคา:</strong> 150 บาท</p>
+            <p><strong>หมวดหมู่:</strong> หนังสือเรียน</p>
+            <p><strong>สภาพ:</strong> พอใช้</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>1 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> มีจดโน้ตเล็กน้อย ขอบหนังสือยับนิดหน่อย</p>
+            <p><strong>จุดนัดรับ:</strong> หน้าคณะตึกวิทย์</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo04</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-5">
+            <img src="" alt="รูปภาพเสื้อนักศึกษา ชาย" width="500" height="500">
+            <h2>เสื้อนักศึกษา ชาย</h2>
+            <p><strong>ราคา:</strong> 100 บาท</p>
+            <p><strong>หมวดหมู่:</strong> เครื่องแต่งกาย</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>1 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> ไซส์ L สภาพดี ซักรีดเรียบร้อย</p>
+            <p><strong>จุดนัดรับ:</strong> หอพักชาย</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo05</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-6">
+            <img src="" alt="รูปภาพกระโปรงนักศึกษา ทรงเอ" width="500" height="500">
+            <h2>กระโปรงนักศึกษา ทรงเอ</h2>
+            <p><strong>ราคา:</strong> 150 บาท</p>
+            <p><strong>หมวดหมู่:</strong> เครื่องแต่งกาย</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>2 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> ยาว 20 นิ้ว เอว 26 ใส่ไปสองครั้ง</p>
+            <p><strong>จุดนัดรับ:</strong> หอพักหญิง</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo06</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-7">
+            <img src="" alt="รูปภาพกางเกงนักศึกษา" width="500" height="500">
+            <h2>กางเกงนักศึกษา</h2>
+            <p><strong>ราคา:</strong> 200 บาท</p>
+            <p><strong>หมวดหมู่:</strong> เครื่องแต่งกาย</p>
+            <p><strong>สภาพ:</strong> ใหม่</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>2 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> สีกรมท่า ไซส์ XL ยังไม่ได้ตัดขา</p>
+            <p><strong>จุดนัดรับ:</strong> หน้าไปรษณีย์</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo07</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-8">
+            <img src="" alt="รูปภาพเนคไทมหาวิทยาลัย" width="500" height="500">
+            <h2>เนคไทมหาวิทยาลัย</h2>
+            <p><strong>ราคา:</strong> 50 บาท</p>
+            <p><strong>หมวดหมู่:</strong> เครื่องแต่งกาย</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>3 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> สภาพดี ของแท้จากศูนย์หนังสือ</p>
+            <p><strong>จุดนัดรับ:</strong> หน้าศูนย์หนังสือ</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo08</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-9">
+            <img src="" alt="รูปภาพเครื่องคิดเลขวิทยาศาสตร์ Casio" width="500" height="500">
+            <h2>เครื่องคิดเลขวิทยาศาสตร์ Casio</h2>
+            <p><strong>ราคา:</strong> 500 บาท</p>
+            <p><strong>หมวดหมู่:</strong> อุปกรณ์อิเล็กทรอนิกส์</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>4 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> รุ่น fx-991EX ใช้งานได้ครบทุกฟังก์ชัน ถ่านเพิ่งเปลี่ยน</p>
+            <p><strong>จุดนัดรับ:</strong> ตึกวิศวกรรมศาสตร์</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo09</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-10">
+            <img src="" alt="รูปภาพiPad Gen 9 (64GB)" width="500" height="500">
+            <h2>iPad Gen 9 (64GB)</h2>
+            <p><strong>ราคา:</strong> 8000 บาท</p>
+            <p><strong>หมวดหมู่:</strong> อุปกรณ์อิเล็กทรอนิกส์</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>4 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> สี Space Gray หมดประกันแล้ว เครื่องศูนย์ไทย อุปกรณ์ครบกล่อง</p>
+            <p><strong>จุดนัดรับ:</strong> ร้านกาแฟหน้ามอ</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo10</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-11">
+            <img src="" alt="รูปภาพเมาส์ไร้สาย Bluetooth" width="500" height="500">
+            <h2>เมาส์ไร้สาย Bluetooth</h2>
+            <p><strong>ราคา:</strong> 150 บาท</p>
+            <p><strong>หมวดหมู่:</strong> อุปกรณ์อิเล็กทรอนิกส์</p>
+            <p><strong>สภาพ:</strong> พอใช้</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>5 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> มีรอยขีดข่วนเล็กน้อยตามการใช้งาน คลิกซ้ายขวายังแน่น</p>
+            <p><strong>จุดนัดรับ:</strong> ห้องสมุดชั้น 1</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo11</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-12">
+            <img src="" alt="รูปภาพพัดลม 16 นิ้ว" width="500" height="500">
+            <h2>พัดลม 16 นิ้ว</h2>
+            <p><strong>ราคา:</strong> 300 บาท</p>
+            <p><strong>หมวดหมู่:</strong> ของใช้ในหอ</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>5 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> พัดลมตั้งโต๊ะ Hatari ลมแรงปกติ ส่ายได้</p>
+            <p><strong>จุดนัดรับ:</strong> หน้าป้อมยามหอใน</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo12</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-13">
+            <img src="" alt="รูปภาพโคมไฟอ่านหนังสือ" width="500" height="500">
+            <h2>โคมไฟอ่านหนังสือ</h2>
+            <p><strong>ราคา:</strong> 100 บาท</p>
+            <p><strong>หมวดหมู่:</strong> ของใช้ในหอ</p>
+            <p><strong>สภาพ:</strong> พอใช้</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>6 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> หลอดไฟยังสว่าง ก้านดัดได้</p>
+            <p><strong>จุดนัดรับ:</strong> ร้านสะดวกซื้อใต้หอ</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo13</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-14">
+            <img src="" alt="รูปภาพตะกร้าผ้าขนาดใหญ่" width="500" height="500">
+            <h2>ตะกร้าผ้าขนาดใหญ่</h2>
+            <p><strong>ราคา:</strong> 50 บาท</p>
+            <p><strong>หมวดหมู่:</strong> ของใช้ในหอ</p>
+            <p><strong>สภาพ:</strong> ดี</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>6 วันผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> พลาสติกหนา ไม่แตกหัก</p>
+            <p><strong>จุดนัดรับ:</strong> โรงอาหารหอพัก</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo14</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        <article id="product-15">
+            <img src="" alt="รูปภาพโต๊ะญี่ปุ่น พับได้" width="500" height="500">
+            <h2>โต๊ะญี่ปุ่น พับได้</h2>
+            <p><strong>ราคา:</strong> 150 บาท</p>
+            <p><strong>หมวดหมู่:</strong> ของใช้ในหอ</p>
+            <p><strong>สภาพ:</strong> พอใช้</p>
+            <p><strong>ลงประกาศเมื่อ:</strong> <time>1 สัปดาห์ผ่านมา</time></p>
+            <p><strong>รายละเอียด:</strong> ลายไม้ มีรอยถลอกที่มุมเล็กน้อย ขาพับได้ปกติ</p>
+            <p><strong>จุดนัดรับ:</strong> ลานจอดรถหอพัก</p>
+            <p><strong>ช่องทางติดต่อ:</strong> LINE: seller_demo15</p>
+            
+            <section>
+                <h3>สำหรับผู้ซื้อ</h3>
+                <button type="button" disabled>บันทึกสินค้าที่สนใจไว้ดูภายหลัง</button>
+            </section>
+            
+            <section>
+                <h3>สำหรับผู้ขาย (จัดการประกาศ)</h3>
+                <button type="button" disabled>ทำเครื่องหมาย "ขายแล้ว"</button>
+                <button type="button" disabled>ลบประกาศของฉัน</button>
+            </section>
+        </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Student Market</p>
+    </footer>
+</body>
+</html>
