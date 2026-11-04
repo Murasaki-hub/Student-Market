@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Market - สินค้าทั้งหมด</title>
+    <style>
+        :root { --primary-color: #0056b3; }
+        body { font-family: sans-serif; margin: 0; padding: 0; }
+        header { background: var(--primary-color); color: white; padding: 1rem; }
+        nav a { color: white; margin-right: 1rem; text-decoration: none; }
+        main { display: flex; padding: 1rem; gap: 1rem; }
+        aside { width: 250px; border-right: 1px solid #ccc; padding-right: 1rem; }
+        .content { flex-grow: 1; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .product-card { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Market</h1>
+        <nav>
+            <a href="index.html">หน้าแรก</a>
+            <a href="products.html">สินค้าทั้งหมด</a>
+        </nav>
+    </header>
+    <main>
+        <aside id="filters">
+            <h2>ค้นหาและกรอง</h2>
+            <input type="text" placeholder="ค้นหาสินค้า..." id="searchInput">
+            
+            <h3>หมวดหมู่</h3>
+            <select id="categoryFilter">
+                <option value="all">ทั้งหมด</option>
+                <option value="books">หนังสือเรียน</option>
+            </select>
+
+            <h3>สภาพ</h3>
+            <label><input type="radio" name="condition" value="ใหม่"> ใหม่</label><br>
+            <label><input type="radio" name="condition" value="ดี"> ดี</label><br>
+            <label><input type="radio" name="condition" value="พอใช้"> พอใช้</label><br>
+
+            <h3>ช่วงราคา</h3>
+            <input type="number" placeholder="ต่ำสุด" min="0"> - <input type="number" placeholder="สูงสุด" min="0">
+        </aside>
+        
+        <section class="content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>รายการสินค้า</h2>
+                <select id="sort">
+                    <option value="latest">ใหม่ล่าสุด</option>
+                    <option value="price_asc">ราคา: ต่ำ-สูง</option>
+                </select>
+            </div>
+            
+            <div class="product-grid" id="product-list">
+                <!-- ตัวอย่างการ์ดสินค้า -->
+                <article class="product-card">
+                    <h3>หนังสือ Calculus 1</h3>
+                    <p>หมวด: หนังสือเรียน</p>
+                    <p>ราคา: 250 บาท</p>
+                    <button>ดูรายละเอียด</button>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

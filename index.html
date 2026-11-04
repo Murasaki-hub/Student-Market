@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Market - หน้าแรก</title>
+    <style>
+        :root { --primary-color: #0056b3; }
+        body { font-family: sans-serif; margin: 0; padding: 0; }
+        header { background: var(--primary-color); color: white; padding: 1rem; }
+        nav a { color: white; margin-right: 1rem; text-decoration: none; }
+        main { padding: 1rem; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .product-card { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Market</h1>
+        <nav>
+            <a href="index.html">หน้าแรก</a>
+            <a href="products.html">สินค้าทั้งหมด</a>
+            <a href="products1.html">หมวดหมู่</a>
+        </nav>
+    </header>
+    <main>
+        <section id="categories">
+            <h2>หมวดหมู่สินค้า</h2>
+            <ul>
+                <li>หนังสือเรียน</li>
+                <li>ชุดนักศึกษา</li>
+                <li>เครื่องใช้ไฟฟ้า</li>
+            </ul>
+        </section>
+        <section id="latest-products">
+            <h2>ประกาศล่าสุด</h2>
+            <div class="product-grid" id="latest-grid">
+                <!-- ข้อมูลจะถูก render ผ่าน JS ที่นี่ -->
+                <article class="product-card">
+                    <h3>หนังสือ</h3>
+                    <p>ราคา: 250 บาท</p>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Smart Campus - Student Market</p>
+    </footer>
+</body>
+</html>
