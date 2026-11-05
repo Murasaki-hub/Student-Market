@@ -1,59 +1,50 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Market - หน้าแรก</title>
-    <link rel="stylesheet" href="external.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>หน้าแรก | Student Market</title>
 </head>
 <body>
-    <header>
-        <h1>Student Market</h1>
-        <nav>
-            <a href="index.html">หน้าแรก</a>
-            <a href="products.html">สินค้าทั้งหมด</a>
-        </nav>
-        <form action="products.html" method="get">
-            <label>หมวดหมู่:
-                <select name="category">
-                    <option value="">ทั้งหมด</option>
-                    <option value="book">หนังสือเรียน</option>
-                    <option value="clothing">เครื่องแต่งกาย</option>
-                    <option value="electronics">อุปกรณ์อิเล็กทรอนิกส์</option>
-                    <option value="dorm">ของใช้ในหอ</option>
-                </select>
-            </label>
-            <button type="submit">ไป</button>
-        </form>
-    </header>
-    <main>
-        <section>
-            <h2>ประกาศล่าสุด</h2>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Calculus 1 (มือสอง)" width="300" height="300">
-                <h3>หนังสือ Calculus 1 (มือสอง)</h3>
-                <p>ราคา: 250 บาท</p>
-                <p><time>2 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=1#product-1">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Physics 2" width="300" height="300">
-                <h3>หนังสือ Physics 2</h3>
-                <p>ราคา: 200 บาท</p>
-                <p><time>3 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=2#product-2">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Chemistry" width="300" height="300">
-                <h3>หนังสือ Chemistry</h3>
-                <p>ราคา: 300 บาท</p>
-                <p><time>5 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=3#product-3">ดูรายละเอียด</a>
-            </article>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Student Market</p>
-    </footer>
+  <header>
+    <nav aria-label="เมนูหลัก">
+      <a href="index.html"><strong>Student Market</strong></a>
+      <a href="products.html">สินค้าทั้งหมด</a>
+      <a href="sell.html">ลงประกาศขาย</a>
+      <a href="my-listings.html">ประกาศของฉัน</a>
+      <label>หมวดหมู่
+        <select name="category">
+          <option value="">ทุกหมวดหมู่</option>
+          <option>หนังสือเรียน</option>
+          <option>ชุดนักศึกษา</option>
+          <option>เครื่องคิดเลข</option>
+          <option>ของใช้ในหอ</option>
+        </select>
+      </label>
+    </nav>
+  </header>
+  <main>
+    <h1>Student Market</h1>
+    <p>ตลาดซื้อขายของมือสองระหว่างนักศึกษา นัดรับของตามจุดจริงในมหาวิทยาลัย</p>
+    
+    <section>
+      <h2>ประกาศล่าสุด</h2>
+      <div></div>
+      <p><a href="products.html">ดูสินค้าทั้งหมด</a></p>
+    </section>
+    
+    <section>
+      <h2>หมวดหมู่</h2>
+      <nav aria-label="หมวดหมู่สินค้า">
+        <p><a href="products.html?category=หนังสือเรียน">หนังสือเรียน</a></p>
+        <p><a href="products.html?category=ชุดนักศึกษา">ชุดนักศึกษา</a></p>
+        <p><a href="products.html?category=เครื่องคิดเลข">เครื่องคิดเลข</a></p>
+        <p><a href="products.html?category=ของใช้ในหอ">ของใช้ในหอ</a></p>
+      </nav>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Student Market</p>
+  </footer>
 </body>
 </html>
