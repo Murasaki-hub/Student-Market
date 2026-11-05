@@ -1,197 +1,72 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Market - สินค้าทั้งหมด</title>
-    <link rel="stylesheet" href="external.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>สินค้าทั้งหมด | Student Market</title>
 </head>
 <body>
-    <header>
-        <h1>Student Market</h1>
-        <nav>
-            <a href="index.html">หน้าแรก</a>
-            <a href="products.html">สินค้าทั้งหมด</a>
-        </nav>
-        <form action="products.html" method="get">
-            <label>หมวดหมู่สินค้า:
-                <select name="category">
-                    <option value="">ทั้งหมด</option>
-                    <option value="book">หนังสือเรียน</option>
-                    <option value="clothing">เครื่องแต่งกาย</option>
-                    <option value="electronics">อุปกรณ์อิเล็กทรอนิกส์</option>
-                    <option value="dorm">ของใช้ในหอ</option>
-                </select>
-            </label>
-            <button type="submit">ไป</button>
-        </form>
-    </header>
-    <main>
-        <section>
-            <h2>ค้นหาและกรองสินค้าเพิ่มเติม</h2>
-            <form action="products.html" method="get">
-                <label>ค้นหาตามชื่อ: <input type="search" name="q" placeholder="พิมพ์ชื่อสินค้า..."></label>
-                <label>สภาพสินค้า: 
-                    <select name="condition">
-                        <option value="">ทั้งหมด</option>
-                        <option value="new">ใหม่</option>
-                        <option value="good">ดี</option>
-                        <option value="fair">พอใช้</option>
-                    </select>
-                </label>
-                <label>ราคาต่ำสุด: <input type="number" name="min_price" min="0"></label>
-                <label>ราคาสูงสุด: <input type="number" name="max_price" min="0"></label>
-                <label>เรียงลำดับ: 
-                    <select name="sort">
-                        <option value="latest">ล่าสุด</option>
-                        <option value="price_asc">ราคา (ต่ำไปสูง)</option>
-                        <option value="price_desc">ราคา (สูงไปต่ำ)</option>
-                    </select>
-                </label>
-                <button type="submit">กรองข้อมูล</button>
-            </form>
-        </section>
-        <section>
-            <h2>รายการสินค้าทั้งหมด (15 รายการ)</h2>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Calculus 1 (มือสอง)" width="300" height="300">
-                <h3>หนังสือ Calculus 1 (มือสอง)</h3>
-                <p>หมวดหมู่: หนังสือเรียน</p>
-                <p>สภาพ: พอใช้</p>
-                <p>ราคา: 250 บาท</p>
-                <p><time>2 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=1#product-1">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Physics 2" width="300" height="300">
-                <h3>หนังสือ Physics 2</h3>
-                <p>หมวดหมู่: หนังสือเรียน</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 200 บาท</p>
-                <p><time>3 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=2#product-2">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Chemistry" width="300" height="300">
-                <h3>หนังสือ Chemistry</h3>
-                <p>หมวดหมู่: หนังสือเรียน</p>
-                <p>สภาพ: ใหม่</p>
-                <p>ราคา: 300 บาท</p>
-                <p><time>5 ชั่วโมงผ่านมา</time></p>
-                <a href="product.html?id=3#product-3">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพหนังสือ Biology" width="300" height="300">
-                <h3>หนังสือ Biology</h3>
-                <p>หมวดหมู่: หนังสือเรียน</p>
-                <p>สภาพ: พอใช้</p>
-                <p>ราคา: 150 บาท</p>
-                <p><time>1 วันผ่านมา</time></p>
-                <a href="product.html?id=4#product-4">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพเสื้อนักศึกษา ชาย" width="300" height="300">
-                <h3>เสื้อนักศึกษา ชาย</h3>
-                <p>หมวดหมู่: เครื่องแต่งกาย</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 100 บาท</p>
-                <p><time>1 วันผ่านมา</time></p>
-                <a href="product.html?id=5#product-5">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพกระโปรงนักศึกษา ทรงเอ" width="300" height="300">
-                <h3>กระโปรงนักศึกษา ทรงเอ</h3>
-                <p>หมวดหมู่: เครื่องแต่งกาย</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 150 บาท</p>
-                <p><time>2 วันผ่านมา</time></p>
-                <a href="product.html?id=6#product-6">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพกางเกงนักศึกษา" width="300" height="300">
-                <h3>กางเกงนักศึกษา</h3>
-                <p>หมวดหมู่: เครื่องแต่งกาย</p>
-                <p>สภาพ: ใหม่</p>
-                <p>ราคา: 200 บาท</p>
-                <p><time>2 วันผ่านมา</time></p>
-                <a href="product.html?id=7#product-7">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพเนคไทมหาวิทยาลัย" width="300" height="300">
-                <h3>เนคไทมหาวิทยาลัย</h3>
-                <p>หมวดหมู่: เครื่องแต่งกาย</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 50 บาท</p>
-                <p><time>3 วันผ่านมา</time></p>
-                <a href="product.html?id=8#product-8">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพเครื่องคิดเลขวิทยาศาสตร์ Casio" width="300" height="300">
-                <h3>เครื่องคิดเลขวิทยาศาสตร์ Casio</h3>
-                <p>หมวดหมู่: อุปกรณ์อิเล็กทรอนิกส์</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 500 บาท</p>
-                <p><time>4 วันผ่านมา</time></p>
-                <a href="product.html?id=9#product-9">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพiPad Gen 9 (64GB)" width="300" height="300">
-                <h3>iPad Gen 9 (64GB)</h3>
-                <p>หมวดหมู่: อุปกรณ์อิเล็กทรอนิกส์</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 8000 บาท</p>
-                <p><time>4 วันผ่านมา</time></p>
-                <a href="product.html?id=10#product-10">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพเมาส์ไร้สาย Bluetooth" width="300" height="300">
-                <h3>เมาส์ไร้สาย Bluetooth</h3>
-                <p>หมวดหมู่: อุปกรณ์อิเล็กทรอนิกส์</p>
-                <p>สภาพ: พอใช้</p>
-                <p>ราคา: 150 บาท</p>
-                <p><time>5 วันผ่านมา</time></p>
-                <a href="product.html?id=11#product-11">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพพัดลม 16 นิ้ว" width="300" height="300">
-                <h3>พัดลม 16 นิ้ว</h3>
-                <p>หมวดหมู่: ของใช้ในหอ</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 300 บาท</p>
-                <p><time>5 วันผ่านมา</time></p>
-                <a href="product.html?id=12#product-12">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพโคมไฟอ่านหนังสือ" width="300" height="300">
-                <h3>โคมไฟอ่านหนังสือ</h3>
-                <p>หมวดหมู่: ของใช้ในหอ</p>
-                <p>สภาพ: พอใช้</p>
-                <p>ราคา: 100 บาท</p>
-                <p><time>6 วันผ่านมา</time></p>
-                <a href="product.html?id=13#product-13">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพตะกร้าผ้าขนาดใหญ่" width="300" height="300">
-                <h3>ตะกร้าผ้าขนาดใหญ่</h3>
-                <p>หมวดหมู่: ของใช้ในหอ</p>
-                <p>สภาพ: ดี</p>
-                <p>ราคา: 50 บาท</p>
-                <p><time>6 วันผ่านมา</time></p>
-                <a href="product.html?id=14#product-14">ดูรายละเอียด</a>
-            </article>
-            <article>
-                <img src="" alt="รูปภาพโต๊ะญี่ปุ่น พับได้" width="300" height="300">
-                <h3>โต๊ะญี่ปุ่น พับได้</h3>
-                <p>หมวดหมู่: ของใช้ในหอ</p>
-                <p>สภาพ: พอใช้</p>
-                <p>ราคา: 150 บาท</p>
-                <p><time>1 สัปดาห์ผ่านมา</time></p>
-                <a href="product.html?id=15#product-15">ดูรายละเอียด</a>
-            </article>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Student Market</p>
-    </footer>
+  <header>
+    <nav aria-label="เมนูหลัก">
+      <a href="index.html"><strong>Student Market</strong></a>
+      <a href="products.html">สินค้าทั้งหมด</a>
+      <a href="sell.html">ลงประกาศขาย</a>
+      <a href="my-listings.html">ประกาศของฉัน</a>
+      <label>หมวดหมู่
+        <select name="category">
+          <option value="">ทุกหมวดหมู่</option>
+          <option>หนังสือเรียน</option>
+          <option>ชุดนักศึกษา</option>
+          <option>เครื่องคิดเลข</option>
+          <option>ของใช้ในหอ</option>
+        </select>
+      </label>
+    </nav>
+  </header>
+  <main>
+    <h1>สินค้าทั้งหมด</h1>
+    
+    <section>
+      <h2>ค้นหาและกรอง</h2>
+      <form>
+        <p>
+          <label>ค้นหาตามชื่อสินค้า <input type="search" name="q"></label>
+        </p>
+        <p>
+          <label>สภาพสินค้า
+            <select name="condition">
+              <option value="">ทุกสภาพ</option>
+              <option>ใหม่</option>
+              <option>ดี</option>
+              <option>พอใช้</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>ราคาต่ำสุด (บาท) <input type="number" name="min" min="0"></label>
+          <label>ราคาสูงสุด (บาท) <input type="number" name="max" min="0"></label>
+        </p>
+        <p>
+          <label>เรียงตาม
+            <select name="sort">
+              <option value="latest">ล่าสุด</option>
+              <option value="low">ราคาต่ำไปสูง</option>
+              <option value="high">ราคาสูงไปต่ำ</option>
+            </select>
+          </label>
+        </p>
+        <button type="reset">ล้างตัวกรอง</button>
+      </form>
+    </section>
+    
+    <section>
+      <h2>รายการสินค้า</h2>
+      <output></output>
+      <div></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Student Market</p>
+  </footer>
 </body>
 </html>
