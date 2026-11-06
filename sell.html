@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ลงประกาศขาย | Student Market</title>
+</head>
+<body>
+	<header>
+		<nav aria-label="เมนูหลัก">
+			<a href="index.html"><strong>Student Market</strong></a>
+			<a href="products.html">สินค้าทั้งหมด</a>
+			<a href="sell.html">ลงประกาศขาย</a>
+			<a href="my-listings.html">ประกาศของฉัน</a>
+			<label>หมวดหมู่
+				<select name="category">
+				<option value="">ทุกหมวดหมู่</option>
+				<option>หนังสือเรียน</option>
+				<option>ชุดนักศึกษา</option>
+				<option>เครื่องคิดเลข</option>
+				<option>ของใช้ในหอ</option>
+				</select>
+			</label>
+		</nav>
+	</header>
+<main>
+	<h1>ลงประกาศขาย</h1>
+		<section>
+		<h2>กรอกข้อมูลสินค้า</h2>
+		<form novalidate>
+				<p><label>ชื่อสินค้า <input type="text" name="title" required minlength="3" maxlength="80"></label></p>
+				<p><label>หมวดหมู่
+				<select name="category" required>
+				<option value="">เลือกหมวดหมู่</option>
+				<option>หนังสือเรียน</option>
+				<option>ชุดนักศึกษา</option>
+				<option>เครื่องคิดเลข</option>
+				<option>ของใช้ในหอ</option>
+				</select>
+			</label></p>
+	<p><label>ราคา (บาท) <input type="number" name="price" min="0" step="1" required></label></p>
+		<fieldset>
+			<legend>สภาพสินค้า</legend>
+			<label><input type="radio" name="condition" value="ใหม่" required> ใหม่</label>
+			<label><input type="radio" name="condition" value="ดี"> ดี</label>
+			<label><input type="radio" name="condition" value="พอใช้"> พอใช้</label>
+		</fieldset>
+	<p><label>รายละเอียด (ไม่เกิน 300 ตัวอักษร)
+<textarea name="description" rows="4" maxlength="300" required></textarea>
+	</label></p>
+<p><label>จุดนัดรับ
+	<select name="meetPoint" required>
+		<option value="">เลือกจุดนัดรับ</option>
+		<option>หน้าหอสมุด</option>
+		<option>โรงอาหารกลาง</option>
+		<option>หน้าอาคารเรียนรวม</option>
+		<option>ลานน้ำพุกลางมหาวิทยาลัย</option>
+		<option>หน้าหอพักนักศึกษา</option>
+		<option>ศูนย์กีฬา</option>
+		<option>ป้ายรถรางหน้ามหาวิทยาลัย</option>
+	</select>
+</label></p>
+<p><label>ช่องทางติดต่อ <input type="text" name="contact" required minlength="3" maxlength="60" placeholder="เช่น LINE: demo_seller01"></label></p>
+<p role="alert"></p>
+<button type="submit">ยืนยันลงประกาศ</button>
+		</form>
+		</section>
+
+<section>
+<h2>ตัวอย่างการ์ดประกาศ</h2>
+<div></div>
+</section>
+</main>
+<footer>
+<p>&copy; 2026 Student Market</p>
+</footer>
+</body>
+</html>
