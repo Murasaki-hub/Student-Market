@@ -1,18 +1,14 @@
-/* =========================================================
-   Student Market — Master CSS Stylesheet
-   โทนสี Modern Teal / Mint (Clean & Professional)
-   ========================================================= */
 
 :root {
-  --primary: #0d9488;         /* สีเขียว Teal หลัก */
-  --primary-hover: #0f766e;   /* สีเขียวเข้มตอนโฮิเวอร์ */
-  --bg-main: #f8fafc;         /* พื้นหลังภาพรวม */
-  --card-bg: #ffffff;         /* พื้นหลังการ์ดและฟอร์ม */
-  --text-main: #1e293b;       /* ตัวอักษรหลัก */
-  --text-light: #64748b;      /* ตัวอักษรรอง */
-  --border-color: #e2e8f0;    /* เส้นขอบ */
-  --radius-lg: 20px;          /* ความโค้งกล่องหลัก */
-  --radius-sm: 10px;          /* ความโค้งปุ่มและช่องกรอก */
+  --primary: #0d9488;         
+  --primary-hover: #0f766e;   
+  --bg-main: #f8fafc;         
+  --card-bg: #ffffff;         
+  --text-main: #1e293b;     
+  --text-light: #64748b;     
+  --border-color: #e2e8f0;   
+  --radius-lg: 20px;       
+  --radius-sm: 10px;      
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
@@ -32,7 +28,6 @@ body {
   min-height: 100vh;
 }
 
-/* ===== 1. Navbar & Header ===== */
 header {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
