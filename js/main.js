@@ -284,10 +284,6 @@ async function renderDetailPage() {
     container.innerHTML = '<p class="no-data">ไม่พบข้อมูลสินค้าชิ้นนี้</p>';
     return;
   }
-
-  const placeholderImg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="100%" height="100%" fill="%23e2e8f0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-family="sans-serif">ไม่มีรูปภาพ</text></svg>';
-  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
-
   container.innerHTML = `
     <div class="product-detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
       <div class="detail-img">
