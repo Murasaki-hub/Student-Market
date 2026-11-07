@@ -98,10 +98,6 @@ function createProductCard(product, allProducts, mode = 'normal') {
   const isGoodPrice = !product.sold && product.price > 0 && avgPrice > 0 && product.price < avgPrice;
   const isSold = Boolean(product.sold);
 
-  // รูปภาพสำรองกรณีไม่มีรูป หรือโหลดรูปไม่ได้
-  const placeholderImg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200"><rect width="100%" height="100%" fill="%23e2e8f0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-family="sans-serif">ไม่มีรูปภาพ</text></svg>';
-  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
-
   const article = document.createElement('article');
   article.className = `product-card ${isSold ? 'sold-out' : ''}`;
   if (isSold) article.style.opacity = '0.65';
