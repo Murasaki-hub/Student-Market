@@ -98,6 +98,10 @@ function createProductCard(product, allProducts, mode = 'normal') {
   const isGoodPrice = !product.sold && product.price > 0 && avgPrice > 0 && product.price < avgPrice;
   const isSold = Boolean(product.sold);
 
+  // กำหนดภาพ Placeholder แบบไม่มีข้อความ (กล่องสีเทาเรียบๆ)
+  const placeholderImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23e2e8f0'/></svg>";
+  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
+
   const article = document.createElement('article');
   article.className = `product-card ${isSold ? 'sold-out' : ''}`;
   if (isSold) article.style.opacity = '0.65';
@@ -284,6 +288,10 @@ async function renderDetailPage() {
     container.innerHTML = '<p class="no-data">ไม่พบข้อมูลสินค้าชิ้นนี้</p>';
     return;
   }
+
+  const placeholderImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='%23e2e8f0'/></svg>";
+  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
+
   container.innerHTML = `
     <div class="product-detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
       <div class="detail-img">
