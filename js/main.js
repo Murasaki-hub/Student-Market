@@ -3,7 +3,7 @@
    ปราศจาก Inline Script (No Inline JS)
    ========================================================= */
 
-const JSON_URL = 'data/products.json';
+const JSON_URL = 'Data/products.json';
 const LOCAL_MINE_KEY = 'sm-mine';
 const LOCAL_WISH_KEY = 'sm-wish';
 
