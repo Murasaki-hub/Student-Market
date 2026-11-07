@@ -48,6 +48,11 @@ nav[aria-label="เมนูหลัก"] {
   flex-wrap: wrap;
 }
 
+/* [เพิ่มใหม่] ดันลิงก์แรก (Student Market) ให้อยู่ทางซ้ายสุด และดันเมนูที่เหลือทั้งหมดไปชิดขวา */
+nav[aria-label="เมนูหลัก"] > a:first-child {
+  margin-right: auto;
+}
+
 nav[aria-label="เมนูหลัก"] a {
   color: var(--text-light);
   text-decoration: none;
@@ -209,7 +214,7 @@ button[type="reset"]:hover {
   color: var(--text-main);
 }
 
-/* ===== 6. Product Grid & Cards (การ์ดสินค้าและกรอบรูปภาพตรงเป๊ะ) ===== */
+/* ===== 6. Product Grid & Cards ===== */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
