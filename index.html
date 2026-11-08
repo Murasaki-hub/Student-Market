@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>หน้าแรก | Student Market</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Market - ตลาดซื้อขายของมือสองนักศึกษา</title>
+  <!-- เปลี่ยนสไตล์ได้ที่นี่: style-theme1.css / style-theme2.css / style-theme3.css -->
+  <link rel="stylesheet" href="css/style-theme1.css">
 </head>
 <body>
-  <header>
-    <nav aria-label="เมนูหลัก">
-      <a href="index.html"><strong>Student Market</strong></a>
-      <a href="products.html">สินค้าทั้งหมด</a>
-      <a href="sell.html">ลงประกาศขาย</a>
-      <a href="mylistings.html">รายการของฉัน</a>
-    </nav>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Student Market</a>
+      <nav>
+        <a href="products.html">สินค้าทั้งหมด</a>
+        <a href="sell.html">ลงประกาศขาย</a>
+        <a href="mylistings.html">รายการของฉัน</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <section class="hero-section">
+
+  <main class="main-container">
+    <section class="hero-banner">
       <h1>Student Market</h1>
       <p>ตลาดซื้อขายของมือสองระหว่างนักศึกษา นัดรับของตามจุดจริงในมหาวิทยาลัย</p>
-      <a href="sell.html" class="btn-main">ลงประกาศขายเลย</a>
+      <a href="sell.html" class="btn btn-primary">ลงประกาศขายเลย</a>
     </section>
-    
-    <section>
-      <h2>ประกาศล่าสุด</h2>
-      <div id="latest-products" class="product-grid">
-        <p class="loading">กำลังโหลดสินค้า...</p>
+
+    <section class="content-card">
+      <div class="section-header">
+        <h2 class="section-title">ประกาศล่าสุด</h2>
       </div>
-      <p style="margin-top: 20px; text-align: center;">
-        <a href="products.html" class="btn-secondary">ดูสินค้าทั้งหมด →</a>
-      </p>
+      <div id="latest-products-grid" class="products-grid">
+        <!-- Render ด้วย JS -->
+      </div>
+      <div class="center-btn">
+        <a href="products.html" class="link-more">ดูสินค้าทั้งหมด &rarr;</a>
+      </div>
     </section>
   </main>
+
   <footer>
-    <p>&copy; 2026 Student Market</p>
+    <p>&copy; 2026 Student Market - Smart Campus Project กลุ่มที่ 5</p>
   </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>
