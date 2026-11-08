@@ -1,94 +1,125 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ลงประกาศขาย | Student Market</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลงประกาศขาย - Student Market</title>
+  <link rel="stylesheet" href="css/style-theme1.css">
 </head>
 <body>
-  <header>
-    <nav aria-label="เมนูหลัก">
-      <a href="index.html"><strong>Student Market</strong></a>
-      <a href="products.html">สินค้าทั้งหมด</a>
-      <a href="sell.html">ลงประกาศขาย</a>
-      <a href="mylistings.html">รายการของฉัน</a>
-    </nav>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Student Market</a>
+      <nav>
+        <a href="products.html">สินค้าทั้งหมด</a>
+        <a href="sell.html" class="active">ลงประกาศขาย</a>
+        <a href="mylistings.html">รายการของฉัน</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <h1>ลงประกาศขายสินค้า</h1>
-    <div class="sell-container">
-      <section class="form-section">
-        <h2>กรอกข้อมูลสินค้า</h2>
+
+  <main class="main-container">
+    <div class="sell-page-grid">
+      <!-- ฟอร์มลงประกาศ -->
+      <section class="content-card">
+        <h1>ลงประกาศขายสินค้า</h1>
         <form id="sell-form" novalidate>
-          <p>
-            <label for="title">ชื่อสินค้า</label>
-            <input type="text" id="title" name="title" required minlength="3" maxlength="80" placeholder="เช่น หนังสือ Calculus 1">
-          </p>
-          <p>
-            <label for="category">หมวดหมู่</label>
-            <select id="category" name="category" required>
-              <option value="">เลือกหมวดหมู่</option>
-              <option value="อุปกรณ์การเรียน">อุปกรณ์การเรียน</option>
-              <option value="ชุดนักศึกษา">ชุดนักศึกษา</option>
-              <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
+          <div class="form-group">
+            <label for="title">ชื่อสินค้า <span class="req">*</span></label>
+            <input type="text" id="title" required placeholder="เช่น หนังสือ Calculus 1">
+            <span class="error-msg" id="err-title"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="category">หมวดหมู่ <span class="req">*</span></label>
+            <select id="category" required>
+              <option value="">-- เลือกหมวดหมู่ --</option>
               <option value="ของใช้ในหอ">ของใช้ในหอ</option>
+              <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
+              <option value="หนังสือเรียน">หนังสือเรียน</option>
+              <option value="อุปกรณ์การเรียน">อุปกรณ์การเรียน</option>
             </select>
-          </p>
-          <p>
-            <label for="price">ราคา (บาท)</label>
-            <input type="number" id="price" name="price" min="0" step="1" required placeholder="0">
-          </p>
-          <fieldset>
-            <legend>สภาพสินค้า</legend>
-            <label><input type="radio" name="condition" value="ใหม่" required> ใหม่</label>
-            <label><input type="radio" name="condition" value="ดี"> ดี</label>
-            <label><input type="radio" name="condition" value="พอใช้"> พอใช้</label>
-          </fieldset>
-          <p>
-            <label for="image-file">รูปภาพสินค้า</label>
+            <span class="error-msg" id="err-category"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="price">ราคา (บาท) <span class="req">*</span></label>
+            <input type="number" id="price" min="0" required placeholder="เช่น 250">
+            <span class="error-msg" id="err-price"></span>
+          </div>
+
+          <div class="form-group">
+            <label>สภาพสินค้า <span class="req">*</span></label>
+            <div class="radio-group">
+              <label><input type="radio" name="condition" value="ใหม่" required> ใหม่</label>
+              <label><input type="radio" name="condition" value="ดี"> ดี</label>
+              <label><input type="radio" name="condition" value="พอใช้"> พอใช้</label>
+            </div>
+            <span class="error-msg" id="err-condition"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="meetPoint">จุดนัดรับในมหาวิทยาลัย <span class="req">*</span></label>
+            <select id="meetPoint" required>
+              <option value="">-- เลือกสถานที่นัดรับ --</option>
+              <option value="หน้าหอสมุด">หน้าหอสมุด</option>
+              <option value="โรงอาหารนอกเมือง (ตึก 22 ชั้น 1)">โรงอาหารนอกเมือง (ตึก 22 ชั้น 1)</option>
+              <option value="ประตูหน้ามหาลัย">ประตูหน้ามหาลัย</option>
+              <option value="หน้าร้านชงโคพาร์ค">หน้าร้านชงโคพาร์ค</option>
+              <option value="สนามฟุตบอลกลาง">สนามฟุตบอลกลาง</option>
+              <option value="ตึกเรียนรวม 1">ตึกเรียนรวม 1</option>
+            </select>
+            <span class="error-msg" id="err-meetPoint"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contact">ช่องทางติดต่อ <span class="req">*</span></label>
+            <input type="text" id="contact" required placeholder="เช่น LINE: student_01">
+            <span class="error-msg" id="err-contact"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="image-file">รูปภาพสินค้า (อัปโหลดหรือใช้รูปตัวอย่าง) <span class="req">*</span></label>
             <input type="file" id="image-file" accept="image/*">
-          </p>
-          <p>
-            <label for="description">รายละเอียด (ไม่เกิน 300 ตัวอักษร)</label>
-            <textarea id="description" name="description" rows="4" maxlength="300" required placeholder="อธิบายรายละเอียด สภาพสินค้าเพิ่มเติม..."></textarea>
-          </p>
-          <p>
-            <label for="meetPoint">จุดนัดรับ</label>
-            <select id="meetPoint" name="meetPoint" required>
-              <option value="">เลือกจุดนัดรับ</option>
-              <option value="ห้องสมุด">ห้องสมุด</option>
-              <option value="โรงอาหารนอกเมือง(ตึก 22 ช้้น 1)">โรงอาหารนอกเมือง(ตึก 22 ช้้น 1)</option>
-              <option value="โรงอาหารในเมือง(ตึก 1 ช้้น 2)">โรงอาหารในเมือง(ตึก 1 ช้้น 2)</option>
-              <option value="หน้าร้านชงโคมาร์ก">หน้าร้านชงโคมาร์ก</option>
-              <option value="ร้านสะดวกซื้อ Lawson">ร้านสะดวกซื้อ Lawson</option>
-              <option value="สนามฟุตบอล">สนามฟุตบอล</option>
-              <option value="ประตูหน้ามอ">ประตูหน้ามอ</option>
-            </select>
-          </p>
-          <p>
-            <label for="contact">ช่องทางติดต่อ</label>
-            <input type="text" id="contact" name="contact" required minlength="3" maxlength="60" placeholder="เช่น LINE: demo_seller01">
-          </p>
-          <p id="error-message" role="alert" class="error-msg"></p>
-          <button type="submit" class="btn-main">ยืนยันลงประกาศ</button>
+            <span class="error-msg" id="err-image"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="description">รายละเอียดสินค้า (ไม่เกิน 200 อักษร)</label>
+            <textarea id="description" maxlength="200" rows="4" placeholder="ระบุรายละเอียด เช่น มีรอยขีดข่วนเล็กน้อย..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">ยืนยันลงประกาศ</button>
         </form>
       </section>
 
-      <section class="preview-section">
-        <h2>ตัวอย่างการ์ดประกาศ (Real-time)</h2>
-        <div id="preview-card" class="product-grid">
-          <!-- Real-time Card Preview Rendered by JS -->
+      <!-- Real-time Preview Card (F4) -->
+      <section class="content-card">
+        <h2>ตัวอย่างการ์ดประกาศ (Preview)</h2>
+        <div class="card-preview-wrapper">
+          <div class="product-card" id="card-preview">
+            <div class="card-img-box">
+              <img id="prev-img" src="https://via.placeholder.com/300x200?text=No+Image" alt="ตัวอย่างสินค้า">
+              <span class="card-tag" id="prev-category">หมวดหมู่</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title" id="prev-title">ชื่อสินค้าจะแสดงที่นี่</h3>
+              <div class="card-price-row">
+                <span class="card-price" id="prev-price">0 บาท</span>
+                <span class="card-condition" id="prev-condition">สภาพ -</span>
+              </div>
+              <p class="card-location" id="prev-location">📍 จุดนัดรับ...</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
   </main>
+
   <footer>
-    <p>&copy; 2026 Student Market</p>
+    <p>&copy; 2026 Student Market - Smart Campus Project</p>
   </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>
