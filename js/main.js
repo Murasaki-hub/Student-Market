@@ -426,3 +426,534 @@ window.deleteListing = function(productId) {
         renderMyListingsAndWishlist();
     }
 };
+
+/**
+ * Student Market — Main JavaScript Bundle (js/main.js)
+ * โค้ดต้นฉบับ Vanilla JavaScript สำหรับโปรเจกต์ Smart Campus
+ */
+
+const JSON_URL = 'data/products.json';
+const LOCAL_MINE_KEY = 'sm-mine';
+const LOCAL_WISH_KEY = 'sm-wish';
+
+// ===== 1. Helper Functions & Security (T6, T7, Cybersecurity XSS Prevention) =====
+
+// ป้องกัน XSS Attack โดยแปลงอักขระพิเศษในสตริงก่อนแสดงผลผ่าน DOM
+const escapeHtml = (str) => {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+// ฟังก์ชัน Debounce สำหรับชะลอการทำงานของ Event Handler ค้นหา เพื่อประสิทธิภาพสูงสุด
+const debounce = (func, wait) => {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+};
+
+// โหลดข้อมูลจาก localStorage พร้อมการจัดการ Error
+const loadStorage = (key, defaultVal) => {
+  try {
+    const val = localStorage.getItem(key);
+    return val === null ? defaultVal : JSON.parse(val);
+  } catch (e) {
+    return defaultVal;
+  }
+};
+
+// บันทึกข้อมูลลง localStorage
+const saveStorage = (key, val) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(val));
+    return true;
+  } catch (e) {
+    alert('ไม่สามารถบันทึกข้อมูลได้ หน่วยความจำเต็ม');
+    return false;
+  }
+};
+
+// แสดงระยะเวลาที่ลงประกาศ เช่น "2 ชั่วโมงที่แล้ว" (ฟีเจอร์เสริม)
+const timeAgo = (isoString) => {
+  if (!isoString) return 'เมื่อสักครู่';
+  const date = new Date(isoString);
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+  
+  if (seconds < 0 || isNaN(seconds)) return 'เมื่อสักครู่';
+  if (seconds < 60) return 'เมื่อสักครู่';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes} นาทีที่แล้ว`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} ชั่วโมงที่แล้ว`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days} วันที่แล้ว`;
+  
+  return date.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
+// แปลงตัวเลขเป็นสกุลเงินบาท
+const formatBaht = (num) => Number(num || 0).toLocaleString('th-TH') + ' บาท';
+
+// F1: Fetch ข้อมูลจากไฟล์ JSON ของกลุ่ม รวมกับประกาศใหม่ใน localStorage
+async function fetchAllProducts() {
+  let jsonProducts = [];
+  try {
+    const res = await fetch(JSON_URL);
+    if (res.ok) {
+      jsonProducts = await res.json();
+    }
+  } catch (e) {
+    console.warn('ไม่สามารถโหลดข้อมูลจาก products.json ได้:', e);
+  }
+
+  const myProducts = loadStorage(LOCAL_MINE_KEY, []);
+  
+  // รวมประกาศจาก localStorage เข้ากับไฟล์ JSON และเรียงลำดับจากล่าสุด
+  const combined = [...myProducts, ...jsonProducts];
+  return combined.sort((a, b) => new Date(b.postedAt || 0) - new Date(a.postedAt || 0));
+}
+
+// คำนวณราคาเฉลี่ยของหมวดหมู่ เพื่อติดป้าย "ราคาดี" (ฟีเจอร์เสริม)
+function getCategoryAveragePrice(products, category) {
+  const list = products.filter(p => p.category === category && p.price > 0);
+  if (!list.length) return 0;
+  const total = list.reduce((sum, p) => sum + Number(p.price), 0);
+  return total / list.length;
+}
+
+// ===== 2. Component สร้างการ์ดสินค้า (DOM Manipulation) =====
+
+function createProductCard(product, allProducts, mode = 'normal') {
+  const wishlist = loadStorage(LOCAL_WISH_KEY, []);
+  const isWishlisted = wishlist.includes(product.id);
+  const avgPrice = getCategoryAveragePrice(allProducts, product.category);
+  
+  const isGoodPrice = !product.sold && product.price > 0 && avgPrice > 0 && product.price < avgPrice;
+  const isSold = Boolean(product.sold);
+
+  // Fallback รูปภาพกรณีไม่มีรูปหรือโหลดไม่ขึ้น
+  const placeholderImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23e2e8f0'/></svg>";
+  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
+
+  const article = document.createElement('article');
+  article.className = `product-card ${isSold ? 'sold-out' : ''}`;
+
+  article.innerHTML = `
+    <div class="card-img-wrap">
+      ${isSold ? '<span class="sold-badge">ขายแล้ว</span>' : ''}
+      ${isGoodPrice ? '<span class="good-price-badge">ราคาดี 🔥</span>' : ''}
+      <img src="${imgSrc}" alt="${escapeHtml(product.title)}" loading="lazy" onerror="this.src='${placeholderImg}'">
+      ${mode !== 'preview' ? `
+        <button type="button" class="wishlist-btn ${isWishlisted ? 'active' : ''}" data-id="${escapeHtml(product.id)}" aria-label="บันทึกสินค้าที่สนใจ">
+          ${isWishlisted ? '★' : '☆'}
+        </button>
+      ` : ''}
+    </div>
+    <div class="card-body">
+      <span class="category-tag">${escapeHtml(product.category)}</span>
+      <h3 class="card-title">
+        ${mode === 'preview' 
+          ? escapeHtml(product.title) 
+          : `<a href="product.html?id=${encodeURIComponent(product.id)}">${escapeHtml(product.title)}</a>`
+        }
+      </h3>
+      <p class="card-price">${formatBaht(product.price)} <span class="condition-badge">สภาพ${escapeHtml(product.condition)}</span></p>
+      <p class="card-location">📍 ${escapeHtml(product.meetPoint)}</p>
+      <p class="card-time">🕒 <time datetime="${escapeHtml(product.postedAt)}">${timeAgo(product.postedAt)}</time></p>
+      
+      ${mode === 'mine' ? `
+        <div class="owner-controls" style="margin-top: 12px; display: flex; gap: 8px;">
+          <button type="button" class="btn-sold btn-secondary" data-id="${escapeHtml(product.id)}" style="flex:1; padding:6px 12px; font-size:0.85rem;">
+            ${isSold ? 'ยกเลิกขายแล้ว' : 'ทำเครื่องหมาย "ขายแล้ว"'}
+          </button>
+          <button type="button" class="btn-delete" data-id="${escapeHtml(product.id)}" style="background:#ef4444; color:white; border:none; border-radius:999px; padding:6px 12px; font-size:0.85rem; cursor:pointer;">
+            ลบ
+          </button>
+        </div>
+      ` : ''}
+    </div>
+  `;
+
+  return article;
+}
+
+// ===== 3. Global Event Delegation (Wishlist, Sold, Delete) =====
+
+function setupGlobalEvents() {
+  // ใช้ querySelector และ Event Delegation ตามหลักการ Vanilla ที่มีประสิทธิภาพ
+  document.addEventListener('click', (e) => {
+    // F6: Wishlist toggle
+    const wishBtn = e.target.closest('.wishlist-btn');
+    if (wishBtn) {
+      const id = wishBtn.dataset.id;
+      let wishlist = loadStorage(LOCAL_WISH_KEY, []);
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(x => x !== id);
+      } else {
+        wishlist.push(id);
+      }
+      saveStorage(LOCAL_WISH_KEY, wishlist);
+      refreshCurrentPage();
+      return;
+    }
+
+    // F5: Toggle Sold Status
+    const soldBtn = e.target.closest('.btn-sold');
+    if (soldBtn) {
+      const id = soldBtn.dataset.id;
+      let myProducts = loadStorage(LOCAL_MINE_KEY, []);
+      myProducts = myProducts.map(p => p.id === id ? { ...p, sold: !p.sold } : p);
+      saveStorage(LOCAL_MINE_KEY, myProducts);
+      refreshCurrentPage();
+      return;
+    }
+
+    // F5: Delete Listing (พร้อมถามยืนยันก่อนลบ)
+    const delBtn = e.target.closest('.btn-delete');
+    if (delBtn) {
+      const id = delBtn.dataset.id;
+      if (confirm('คุณต้องการลบประกาศนี้ใช่หรือไม่?')) {
+        let myProducts = loadStorage(LOCAL_MINE_KEY, []);
+        let wishlist = loadStorage(LOCAL_WISH_KEY, []);
+        
+        myProducts = myProducts.filter(p => p.id !== id);
+        wishlist = wishlist.filter(x => x !== id);
+        
+        saveStorage(LOCAL_MINE_KEY, myProducts);
+        saveStorage(LOCAL_WISH_KEY, wishlist);
+        refreshCurrentPage();
+      }
+      return;
+    }
+  });
+
+  // อัปเดตเวลาแบบ Real-time ทุก 30 วินาที
+  setInterval(() => {
+    document.querySelectorAll('time').forEach(t => {
+      const datetime = t.getAttribute('datetime');
+      if (datetime) t.textContent = timeAgo(datetime);
+    });
+  }, 30000);
+}
+
+// ===== 4. Page Controller (ควบคุมการเรนเดอร์แต่ละหน้า) =====
+
+async function refreshCurrentPage() {
+  await renderIndexPage();
+  await renderProductsPage();
+  await renderDetailPage();
+  await renderMyListingsPage();
+}
+
+// หน้าที่ 1: index.html (หน้าแรก: ประกาศล่าสุด)
+async function renderIndexPage() {
+  const container = document.querySelector('#latest-products');
+  if (!container) return;
+
+  const products = await fetchAllProducts();
+  const latest = products.slice(0, 8);
+
+  container.replaceChildren();
+  if (!latest.length) {
+    container.innerHTML = '<p class="loading">ยังไม่มีประกาศสินค้าในระบบ</p>';
+    return;
+  }
+
+  latest.forEach(p => {
+    container.appendChild(createProductCard(p, products, 'normal'));
+  });
+}
+
+// หน้าที่ 2: products.html (สินค้าทั้งหมด พร้อมค้นหา/ตัวกรอง/เรียงลำดับ F2)
+async function renderProductsPage() {
+  const container = document.querySelector('#product-grid');
+  if (!container) return;
+
+  const allProducts = await fetchAllProducts();
+  const form = document.querySelector('#filter-form');
+  const searchInput = document.querySelector('#search-input');
+  const categorySelect = document.querySelector('#category-select');
+  const conditionSelect = document.querySelector('#condition-select');
+  const minPriceInput = document.querySelector('#min-price');
+  const maxPriceInput = document.querySelector('#max-price');
+  const sortSelect = document.querySelector('#sort-select');
+  const resultCount = document.querySelector('#result-count');
+
+  // ตรวจสอบ Query Parameter จาก URL หากมีการกดเลือกหมวดหมู่จากหน้าอื่น
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('category') && categorySelect) {
+    categorySelect.value = urlParams.get('category');
+  }
+
+  function applyFilter() {
+    let list = [...allProducts];
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    const cat = categorySelect?.value || '';
+    const cond = conditionSelect?.value || '';
+    const min = parseFloat(minPriceInput?.value) || 0;
+    const max = parseFloat(maxPriceInput?.value) || Infinity;
+    const sort = sortSelect?.value || 'latest';
+
+    // กรองตามชื่อ, หมวดหมู่, สภาพ, ช่วงราคา
+    if (q) list = list.filter(p => p.title.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)));
+    if (cat) list = list.filter(p => p.category === cat);
+    if (cond) list = list.filter(p => p.condition === cond);
+    list = list.filter(p => Number(p.price) >= min && Number(p.price) <= max);
+
+    // เรียงลำดับ
+    if (sort === 'low') {
+      list.sort((a, b) => Number(a.price) - Number(b.price));
+    } else if (sort === 'high') {
+      list.sort((a, b) => Number(b.price) - Number(a.price));
+    } else {
+      list.sort((a, b) => new Date(b.postedAt || 0) - new Date(a.postedAt || 0));
+    }
+
+    if (resultCount) {
+      resultCount.textContent = `พบสินค้าทั้งหมด ${list.length} รายการ`;
+    }
+
+    container.replaceChildren();
+    if (!list.length) {
+      container.innerHTML = '<p class="loading">ไม่พบสินค้าที่ตรงกับเงื่อนไขการค้นหา</p>';
+      return;
+    }
+
+    list.forEach(p => {
+      container.appendChild(createProductCard(p, allProducts, 'normal'));
+    });
+  }
+
+  if (form && !form.dataset.initialized) {
+    form.dataset.initialized = 'true';
+    form.addEventListener('input', debounce(applyFilter, 200));
+    form.addEventListener('change', applyFilter);
+    form.addEventListener('reset', () => setTimeout(applyFilter, 10));
+  }
+
+  applyFilter();
+}
+
+// หน้าที่ 3: product.html (รายละเอียดสินค้าเดี่ยว)
+async function renderDetailPage() {
+  const container = document.querySelector('#product-detail-container');
+  if (!container) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
+  const products = await fetchAllProducts();
+  const product = products.find(p => p.id === id);
+
+  if (!product) {
+    container.innerHTML = '<h2>ไม่พบข้อมูลสินค้า</h2><p><a href="products.html">← กลับไปหน้าสินค้าทั้งหมด</a></p>';
+    return;
+  }
+
+  const wishlist = loadStorage(LOCAL_WISH_KEY, []);
+  const isWishlisted = wishlist.includes(product.id);
+  const placeholderImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='%23e2e8f0'/></svg>";
+  const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
+
+  container.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; align-items: start;">
+      <div class="card-img-wrap" style="height: 320px; border-radius: 12px;">
+        ${product.sold ? '<span class="sold-badge">ขายแล้ว</span>' : ''}
+        <img src="${imgSrc}" alt="${escapeHtml(product.title)}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${placeholderImg}'">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span class="category-tag">${escapeHtml(product.category)}</span>
+        <h1 style="font-size: 1.8rem; margin: 0;">${escapeHtml(product.title)}</h1>
+        <p class="card-price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">
+          ${formatBaht(product.price)} <span class="condition-badge" style="font-size:0.9rem;">สภาพ${escapeHtml(product.condition)}</span>
+        </p>
+        <p><strong>📍 จุดนัดรับจริงในมหาวิทยาลัย:</strong> ${escapeHtml(product.meetPoint)}</p>
+        <p><strong>📞 ช่องทางติดต่อ:</strong> ${escapeHtml(product.contact)}</p>
+        <p><strong>🕒 เวลาลงประกาศ:</strong> <time datetime="${escapeHtml(product.postedAt)}">${timeAgo(product.postedAt)}</time></p>
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 8px 0;">
+        <p><strong>รายละเอียดสินค้า:</strong></p>
+        <p style="white-space: pre-line; color: var(--text-light);">${escapeHtml(product.description)}</p>
+        
+        <button type="button" class="btn-main wishlist-btn" data-id="${escapeHtml(product.id)}" style="margin-top: 16px; width: fit-content;">
+          ${isWishlisted ? '★ เอาออกจากรายการที่สนใจ' : '☆ บันทึกเป็นรายการที่สนใจ (Wishlist)'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// หน้าที่ 4: sell.html (ฟอร์มลงประกาศ พร้อม FileReader และ Real-time Preview F3, F4)
+function renderSellPage() {
+  const form = document.querySelector('#sell-form');
+  const previewBox = document.querySelector('#preview-card');
+  const errBox = document.querySelector('#error-message');
+  if (!form || !previewBox) return;
+
+  let imageBase64 = '';
+  const imgInput = document.querySelector('#image-file');
+
+  // อ่านไฟล์ภาพด้วย FileReader (ฟีเจอร์เสริม)
+  if (imgInput && !imgInput.dataset.listener) {
+    imgInput.dataset.listener = 'true';
+    imgInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          imageBase64 = evt.target.result;
+          updatePreview();
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imageBase64 = '';
+        updatePreview();
+      }
+    });
+  }
+
+  // F4: พรีวิวการ์ดประกาศแบบ Real-time ขณะกรอกฟอร์ม
+  function updatePreview() {
+    const formData = new FormData(form);
+    const mockProduct = {
+      id: 'preview',
+      title: formData.get('title') || 'ชื่อสินค้าตัวอย่าง',
+      category: formData.get('category') || 'หมวดหมู่',
+      price: formData.get('price') || 0,
+      condition: formData.get('condition') || 'ดี',
+      meetPoint: formData.get('meetPoint') || 'จุดนัดรับ',
+      postedAt: new Date().toISOString(),
+      image: imageBase64,
+      sold: false
+    };
+
+    previewBox.replaceChildren(createProductCard(mockProduct, [], 'preview'));
+  }
+
+  if (!form.dataset.previewInit) {
+    form.dataset.previewInit = 'true';
+    form.addEventListener('input', updatePreview);
+    form.addEventListener('change', updatePreview);
+  }
+  updatePreview();
+
+  // F3: Form Validation & Submit Handler
+  if (!form.dataset.submitInit) {
+    form.dataset.submitInit = 'true';
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (errBox) errBox.textContent = '';
+
+      const formData = new FormData(form);
+      const title = formData.get('title')?.trim();
+      const category = formData.get('category');
+      const price = formData.get('price');
+      const condition = formData.get('condition');
+      const description = formData.get('description')?.trim();
+      const meetPoint = formData.get('meetPoint');
+      const contact = formData.get('contact')?.trim();
+
+      // ตรวจสอบ Validation เบื้องต้นด้วย JavaScript
+      if (!title || title.length < 3) {
+        if (errBox) errBox.textContent = 'กรุณากรอกชื่อสินค้าอย่างน้อย 3 ตัวอักษร';
+        return;
+      }
+      if (!category) {
+        if (errBox) errBox.textContent = 'กรุณาเลือกหมวดหมู่สินค้า';
+        return;
+      }
+      if (price === '' || Number(price) < 0) {
+        if (errBox) errBox.textContent = 'กรุณากรอกราคาตั้งแต่ 0 บาทขึ้นไป';
+        return;
+      }
+      if (!condition) {
+        if (errBox) errBox.textContent = 'กรุณาเลือกสภาพสินค้า';
+        return;
+      }
+      if (!description) {
+        if (errBox) errBox.textContent = 'กรุณากรอกรายละเอียดสินค้า';
+        return;
+      }
+      if (!meetPoint) {
+        if (errBox) errBox.textContent = 'กรุณาเลือกจุดนัดรับจริงในมหาวิทยาลัย';
+        return;
+      }
+      if (!contact) {
+        if (errBox) errBox.textContent = 'กรุณากรอกช่องทางติดต่อ';
+        return;
+      }
+
+      const newProduct = {
+        id: 'usr_' + Date.now(),
+        title,
+        category,
+        price: Number(price),
+        condition,
+        description,
+        meetPoint,
+        contact,
+        postedAt: new Date().toISOString(),
+        sold: false,
+        image: imageBase64 || ''
+      };
+
+      const myProducts = loadStorage(LOCAL_MINE_KEY, []);
+      myProducts.unshift(newProduct);
+
+      if (saveStorage(LOCAL_MINE_KEY, myProducts)) {
+        alert('ลงประกาศขายสินค้าสำเร็จ!');
+        window.location.href = 'mylistings.html';
+      }
+    });
+  }
+}
+
+// หน้าที่ 5: mylistings.html (ประกาศของฉัน และรายการที่สนใจ Wishlist F5, F6)
+async function renderMyListingsPage() {
+  const myGrid = document.querySelector('#my-listings-grid');
+  const wishlistGrid = document.querySelector('#wishlist-grid');
+  if (!myGrid && !wishlistGrid) return;
+
+  const allProducts = await fetchAllProducts();
+  const myProducts = loadStorage(LOCAL_MINE_KEY, []);
+  const wishlistIds = loadStorage(LOCAL_WISH_KEY, []);
+
+  // เรนเดอร์ประกาศของฉัน (พร้อมปุ่มจัดการ ขายแล้ว / ลบ)
+  if (myGrid) {
+    myGrid.replaceChildren();
+    if (!myProducts.length) {
+      myGrid.innerHTML = '<p class="loading">ยังไม่มีประกาศที่คุณลงขาย</p>';
+    } else {
+      myProducts.forEach(p => {
+        myGrid.appendChild(createProductCard(p, allProducts, 'mine'));
+      });
+    }
+  }
+
+  // เรนเดอร์รายการที่สนใจ (Wishlist F6)
+  if (wishlistGrid) {
+    const wishProducts = allProducts.filter(p => wishlistIds.includes(p.id));
+    wishlistGrid.replaceChildren();
+    if (!wishProducts.length) {
+      wishlistGrid.innerHTML = '<p class="loading">ยังไม่มีรายการที่สนใจในขณะนี้</p>';
+    } else {
+      wishProducts.forEach(p => {
+        wishlistGrid.appendChild(createProductCard(p, allProducts, 'normal'));
+      });
+    }
+  }
+}
+
+// ===== 5. App Initializer =====
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupGlobalEvents();
+  renderIndexPage();
+  renderProductsPage();
+  renderDetailPage();
+  renderSellPage();
+  renderMyListingsPage();
+});
