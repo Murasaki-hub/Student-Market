@@ -4,7 +4,7 @@ AI_LOG — บันทึกการใช้ AI ของกลุ่มท�
 
 | วันที่ | ผู้ใช้ | เครื่องมือ AI | จุดประสงค์ | prompt หลัก | ผลที่ได้ | สิ่งที่ตรวจสอบ/แก้ไขก่อนใช้ |
 
-|5/11/2569|6721207034rattus|Claude|สร้าง Semantic HTML5 ของ Student Market จากข้อมูล **กลุ่มที่5 Student-Market**.pdf|สร้าง 5 Semantic HTML5|<footer> เปลี่ยนเเป็น &copy; 2026 Student Market|
+|5/11/2569|6721207034rattus|Claude|สร้าง Semantic HTML5 ของ Student Market จากข้อมูล **กลุ่มที่5 Student-Market**.pdf|สร้าง 5 Semantic HTML5|footer เปลี่ยนเเป็น &copy; 2026 Student Market|
 
 |6/11/2569|Muraski-hub|Gemini|ค้นหาและรวบรวมสินค้ามือสองที่นักศึกษาขายกัน||---|---|
 
