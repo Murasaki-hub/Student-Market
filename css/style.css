@@ -48,7 +48,6 @@ nav[aria-label="เมนูหลัก"] {
   flex-wrap: wrap;
 }
 
-/* ดันลิงก์แรก (Student Market) ให้อยู่ทางซ้ายสุด และดันเมนูที่เหลือทั้งหมดไปชิดขวา */
 nav[aria-label="เมนูหลัก"] > a:first-child {
   margin-right: auto;
 }
@@ -73,7 +72,6 @@ nav[aria-label="เมนูหลัก"] label {
   color: var(--text-light);
 }
 
-/* ===== 2. Main Layout ===== */
 main {
   max-width: 1200px;
   width: 100%;
@@ -100,7 +98,6 @@ p {
   margin-bottom: 16px;
 }
 
-/* ===== 3. Sections & Containers ===== */
 section {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -110,7 +107,6 @@ section {
   box-shadow: var(--shadow);
 }
 
-/* ===== 4. Forms & Inputs ===== */
 form {
   display: grid;
   gap: 20px;
@@ -173,7 +169,6 @@ fieldset label {
   cursor: pointer;
 }
 
-/* ===== 5. Buttons ===== */
 button[type="submit"],
 .btn-main {
   background-color: var(--primary);
@@ -214,7 +209,6 @@ button[type="reset"]:hover {
   color: var(--text-main);
 }
 
-/* ===== 6. Product Grid & Cards ===== */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -368,7 +362,6 @@ button[type="reset"]:hover {
   z-index: 2;
 }
 
-/* ===== 7. Footer ===== */
 footer {
   text-align: center;
   padding: 24px;
@@ -378,7 +371,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ===== 8. Index Page Header & Category Dropdown (เพิ่มใหม่) ===== */
 .section-header-flex {
   display: flex;
   justify-content: space-between;
@@ -434,7 +426,6 @@ footer {
   margin-top: 4px;
 }
 
-/* เมื่อเอาเมาส์ชี้ให้แสดงดรอปดาวน์หมวดหมู่ */
 .category-dropdown:hover .category-menu {
   display: block;
 }
@@ -453,7 +444,6 @@ footer {
   color: var(--primary);
 }
 
-/* ระบบตัวกรองเดิมที่อาจมีค้างไว้ */
 .category-filters {
   display: flex;
   gap: 14px;
@@ -480,7 +470,6 @@ footer {
   margin-top: 24px;
 }
 
-/* ===== 9. Responsive Design ===== */
 @media (max-width: 768px) {
   nav[aria-label="เมนูหลัก"] {
     height: auto;
