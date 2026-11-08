@@ -1,88 +1,75 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>สินค้าทั้งหมด | Student Market</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สินค้าทั้งหมด - Student Market</title>
+  <link rel="stylesheet" href="css/style-theme1.css">
 </head>
 <body>
-  <header>
-    <nav aria-label="เมนูหลัก">
-      <a href="index.html"><strong>Student Market</strong></a>
-      <a href="products.html">สินค้าทั้งหมด</a>
-      <a href="sell.html">ลงประกาศขาย</a>
-      <a href="mylistings.html">รายการของฉัน</a>
-    </nav>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Student Market</a>
+      <nav>
+        <a href="products.html" class="active">สินค้าทั้งหมด</a>
+        <a href="sell.html">ลงประกาศขาย</a>
+        <a href="mylistings.html">รายการของฉัน</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <h1>สินค้าทั้งหมด</h1>
-    
-    <section>
-      <h2>ค้นหาและกรอง</h2>
-      <form id="filter-form">
-        <p>
-          <label for="search-input">ค้นหาตามชื่อสินค้า</label>
-          <input type="search" id="search-input" name="q" placeholder="พิมพ์ชื่อสินค้า...">
-        </p>
-        <div class="filter-row">
-          <p>
-            <label for="category-select">หมวดหมู่</label>
-            <select id="category-select" name="category">
-              <option value="">ทุกหมวดหมู่</option>
-              <option value="อุปกรณ์การเรียน">อุปกรณ์การเรียน</option>
-              <option value="ชุดนักศึกษา">ชุดนักศึกษา</option>
-              <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
-              <option value="ของใช้ในหอ">ของใช้ในหอ</option>
-            </select>
-          </p>
-          <p>
-            <label for="condition-select">สภาพสินค้า</label>
-            <select id="condition-select" name="condition">
-              <option value="">ทุกสภาพ</option>
-              <option value="ใหม่">ใหม่</option>
-              <option value="ดี">ดี</option>
-              <option value="พอใช้">พอใช้</option>
-            </select>
-          </p>
+
+  <main class="main-container">
+    <section class="content-card">
+      <h1>สินค้าทั้งหมดในมหาวิทยาลัย</h1>
+      
+      <!-- Filter Bar -->
+      <div class="filter-box">
+        <div class="filter-group">
+          <label for="search-input">ค้นหาสินค้า:</label>
+          <input type="text" id="search-input" placeholder="พิมพ์ชื่อสินค้า...">
         </div>
-        <div class="filter-row">
-          <p>
-            <label for="min-price">ราคาต่ำสุด (บาท)</label>
-            <input type="number" id="min-price" name="min" min="0" placeholder="0">
-          </p>
-          <p>
-            <label for="max-price">ราคาสูงสุด (บาท)</label>
-            <input type="number" id="max-price" name="max" min="0" placeholder="ไม่จำกัด">
-          </p>
-          <p>
-            <label for="sort-select">เรียงตาม</label>
-            <select id="sort-select" name="sort">
-              <option value="latest">ล่าสุด</option>
-              <option value="low">ราคาต่ำไปสูง</option>
-              <option value="high">ราคาสูงไปต่ำ</option>
-            </select>
-          </p>
+
+        <div class="filter-group">
+          <label for="category-filter">หมวดหมู่:</label>
+          <select id="category-filter">
+            <option value="all">ทุกหมวดหมู่</option>
+            <option value="ของใช้ในหอ">ของใช้ในหอ</option>
+            <option value="ของใช้ส่วนตัว">ของใช้ส่วนตัว</option>
+            <option value="หนังสือเรียน">หนังสือเรียน</option>
+            <option value="อุปกรณ์การเรียน">อุปกรณ์การเรียน</option>
+          </select>
         </div>
-        <button type="reset" id="reset-btn">ล้างตัวกรอง</button>
-      </form>
-    </section>
-    
-    <section>
-      <h2>รายการสินค้า</h2>
-      <output id="result-count"></output>
-      <div id="product-grid" class="product-grid">
-        <p class="loading">กำลังโหลดสินค้า...</p>
+
+        <div class="filter-group">
+          <label for="condition-filter">สภาพสินค้า:</label>
+          <select id="condition-filter">
+            <option value="all">ทุกสภาพ</option>
+            <option value="ใหม่">ใหม่</option>
+            <option value="ดี">ดี</option>
+            <option value="พอใช้">พอใช้</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-filter">เรียงลำดับ:</label>
+          <select id="sort-filter">
+            <option value="newest">ล่าสุด</option>
+            <option value="price-low">ราคา: ต่ำสุด -> สูงสุด</option>
+            <option value="price-high">ราคา: สูงสุด -> ต่ำสุด</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="all-products-grid" class="products-grid">
+        <!-- Render ด้วย JS -->
       </div>
     </section>
   </main>
+
   <footer>
-    <p>&copy; 2026 Student Market</p>
+    <p>&copy; 2026 Student Market - Smart Campus Project</p>
   </footer>
+
   <script src="js/main.js"></script>
-</body>
 </body>
 </html>
