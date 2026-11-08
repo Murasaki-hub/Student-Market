@@ -1,15 +1,7 @@
-/* =========================================================
-   Student Market — Master JavaScript (js/main.js)
-   ปราศจาก Inline Script (No Inline JS)
-   ========================================================= */
-
 const JSON_URL = 'Data/products.json';
 const LOCAL_MINE_KEY = 'sm-mine';
 const LOCAL_WISH_KEY = 'sm-wish';
 
-// ===== 1. Helper Functions (ฟังก์ชันช่วยเหลือ) =====
-
-// Safe HTML String ป้องกัน XSS
 const escapeHtml = (str) => {
   return String(str || '')
     .replace(/&/g, '&amp;')
@@ -19,7 +11,6 @@ const escapeHtml = (str) => {
     .replace(/'/g, '&#39;');
 };
 
-// อ่านข้อมูลจาก localStorage
 const loadStorage = (key, defaultVal) => {
   try {
     const val = localStorage.getItem(key);
@@ -29,7 +20,6 @@ const loadStorage = (key, defaultVal) => {
   }
 };
 
-// บันทึกข้อมูลลง localStorage
 const saveStorage = (key, val) => {
   try {
     localStorage.setItem(key, JSON.stringify(val));
@@ -40,7 +30,6 @@ const saveStorage = (key, val) => {
   }
 };
 
-// คำนวณเวลา "กี่นาทีที่แล้ว / กี่ชั่วโมงที่แล้ว"
 const timeAgo = (isoString) => {
   if (!isoString) return 'เมื่อสักครู่';
   const date = new Date(isoString);
@@ -58,10 +47,8 @@ const timeAgo = (isoString) => {
   return date.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
-// ฟอร์แมตราคา (บาท)
 const formatBaht = (num) => Number(num || 0).toLocaleString('th-TH') + ' บาท';
 
-// ดึงข้อมูลสินค้าทั้งหมด (JSON + LocalStorage ของฉัน)
 async function fetchAllProducts() {
   let jsonProducts = [];
   try {
@@ -75,20 +62,16 @@ async function fetchAllProducts() {
 
   const myProducts = loadStorage(LOCAL_MINE_KEY, []);
   
-  // นำสินค้าที่ลงขายเองมารวมกับสินค้าจาก JSON แล้วเรียงตามเวลาล่าสุด
   const combined = [...myProducts, ...jsonProducts];
   return combined.sort((a, b) => new Date(b.postedAt || 0) - new Date(a.postedAt || 0));
 }
 
-// คำนวณราคาเฉลี่ยตามหมวดหมู่ เพื่อติดป้าย "ราคาดี"
 function getCategoryAveragePrice(products, category) {
   const list = products.filter(p => p.category === category && p.price > 0);
   if (!list.length) return 0;
   const total = list.reduce((sum, p) => sum + Number(p.price), 0);
   return total / list.length;
 }
-
-// ===== 2. Card Component Generator (ตัวสร้างการ์ดสินค้าพร้อมรูปภาพ) =====
 
 function createProductCard(product, allProducts, mode = 'normal') {
   const wishlist = loadStorage(LOCAL_WISH_KEY, []);
@@ -98,7 +81,6 @@ function createProductCard(product, allProducts, mode = 'normal') {
   const isGoodPrice = !product.sold && product.price > 0 && avgPrice > 0 && product.price < avgPrice;
   const isSold = Boolean(product.sold);
 
-  // กำหนดภาพ Placeholder แบบไม่มีข้อความ (กล่องสีเทาเรียบๆ)
   const placeholderImg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23e2e8f0'/></svg>";
   const imgSrc = product.image ? escapeHtml(product.image) : placeholderImg;
 
@@ -143,8 +125,6 @@ function createProductCard(product, allProducts, mode = 'normal') {
   return article;
 }
 
-// ===== 3. Global Event Handlers ( Wishlist / Delete / Sold ) =====
-
 function setupGlobalEvents() {
   document.addEventListener('click', (e) => {
     // ปุ่ม Wishlist (ดาว/หัวใจ)
@@ -160,7 +140,6 @@ function setupGlobalEvents() {
       window.location.reload();
     }
 
-    // ปุ่มทำเครื่องหมายขายแล้ว (ในหน้ารายการของฉัน)
     if (e.target.classList.contains('btn-sold')) {
       const id = e.target.dataset.id;
       let myProducts = loadStorage(LOCAL_MINE_KEY, []);
@@ -169,7 +148,6 @@ function setupGlobalEvents() {
       window.location.reload();
     }
 
-    // ปุ่มลบประกาศ (ในหน้ารายการของฉัน)
     if (e.target.classList.contains('btn-delete')) {
       const id = e.target.dataset.id;
       if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบประกาศนี้?')) {
@@ -186,7 +164,6 @@ function setupGlobalEvents() {
     }
   });
 
-  // อัปเดตเวลา "กี่นาทีที่แล้ว" ทุก 30 วินาทีแบบ Real-time
   setInterval(() => {
     document.querySelectorAll('time').forEach(t => {
       const datetime = t.getAttribute('datetime');
@@ -195,9 +172,6 @@ function setupGlobalEvents() {
   }, 30000);
 }
 
-// ===== 4. Controller แต่ละหน้า =====
-
-// 4.1 หน้าแรก (index.html)
 async function renderIndexPage() {
   const container = document.querySelector('#latest-products');
   if (!container) return;
@@ -216,7 +190,6 @@ async function renderIndexPage() {
   });
 }
 
-// 4.2 หน้าสินค้าทั้งหมด (products.html - Filter & Search)
 async function renderProductsPage() {
   const container = document.querySelector('#product-grid');
   if (!container) return;
@@ -231,7 +204,6 @@ async function renderProductsPage() {
   const sortSelect = document.querySelector('#sort-select');
   const resultCount = document.querySelector('#result-count');
 
-  // อ่าน Query String จาก URL เช่น ?category=อุปกรณ์การเรียน
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('category')) {
     catSelect.value = urlParams.get('category');
@@ -274,7 +246,6 @@ async function renderProductsPage() {
   applyFilter();
 }
 
-// 4.3 หน้ารายละเอียดสินค้า (product.html)
 async function renderDetailPage() {
   const container = document.querySelector('#product-detail-container');
   if (!container) return;
@@ -315,7 +286,6 @@ async function renderDetailPage() {
   `;
 }
 
-// 4.4 หน้าลงประกาศ (sell.html - Real-time Preview & FileReader)
 function renderSellPage() {
   const form = document.querySelector('#sell-form');
   const previewBox = document.querySelector('#preview-card');
@@ -324,7 +294,6 @@ function renderSellPage() {
   let imageBase64 = '';
   const imgInput = document.querySelector('#image-file');
 
-  // อ่านไฟล์รูปด้วย FileReader
   if (imgInput) {
     imgInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -396,7 +365,6 @@ function renderSellPage() {
   });
 }
 
-// 4.5 หน้ารายการของฉัน & สินค้าที่สนใจ (mylistings.html)
 async function renderMyListingsPage() {
   const myGrid = document.querySelector('#my-listings-grid');
   const wishGrid = document.querySelector('#wishlist-grid');
@@ -406,7 +374,6 @@ async function renderMyListingsPage() {
   const myProducts = loadStorage(LOCAL_MINE_KEY, []);
   const wishIds = loadStorage(LOCAL_WISH_KEY, []);
 
-  // 1. ประกาศที่ฉันลงขาย
   if (myGrid) {
     myGrid.replaceChildren();
     if (!myProducts.length) {
@@ -418,7 +385,6 @@ async function renderMyListingsPage() {
     }
   }
 
-  // 2. รายการสินค้าที่สนใจ (Wishlist)
   if (wishGrid) {
     const wishedProducts = allProducts.filter(p => wishIds.includes(p.id));
     wishGrid.replaceChildren();
@@ -432,7 +398,6 @@ async function renderMyListingsPage() {
   }
 }
 
-// ===== 5. Initializer (เริ่มทำงานเมื่อโหลด DOM เสร็จ) =====
 
 document.addEventListener('DOMContentLoaded', () => {
   setupGlobalEvents();
