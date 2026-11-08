@@ -31,7 +31,12 @@ F6 รายการทีสนใจ (wishlist) บันทึกด้ว�
 สถานที่ได้อิงที่มาจากในมหาลัย สิ่งของและรูปภาพได้ใช้จากรูปภาพที่ถ่ายจริง โดยไม่มีการอ้างอิงจากเว็บหรือแหล่งอื่นทั้งสิ้น
 
 # ภาพหน้าจอผล Lighthouse (Accessibility) ของหน้าหลัก
-<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/74881542-00a1-45e3-ab6d-8cbb74b2e23b" />
+<img width="200" height="200" alt="Screenshot 2026-11-08 223302" src="https://github.com/user-attachments/assets/4c6dba1e-66c0-4bb3-aead-e13214cf2c88" />
+<img width="200" height="200" alt="Screenshot 2026-11-08 223327" src="https://github.com/user-attachments/assets/1ba051aa-76ad-456d-89d0-aaf2a0e952d8" />
+<img width="200" height="200" alt="Screenshot 2026-11-08 223358" src="https://github.com/user-attachments/assets/49846fc2-78ff-4d24-83ef-dc03d51ffac5" />
+<img width="200" height="200" alt="Screenshot 2026-11-08 223421" src="https://github.com/user-attachments/assets/ebe9487e-933d-4fdf-a249-bf245466611c" />
+<img width="200" height="200" alt="Screenshot 2026-11-08 223456" src="https://github.com/user-attachments/assets/f66cd03e-043a-4f6e-b478-a247c677f2f3" />
+
 
 
 
