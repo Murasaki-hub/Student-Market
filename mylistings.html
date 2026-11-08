@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>รายการของฉัน | Student Market</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายการของฉัน - Student Market</title>
+  <link rel="stylesheet" href="css/style-theme1.css">
 </head>
 <body>
-  <header>
-    <nav aria-label="เมนูหลัก">
-      <a href="index.html"><strong>Student Market</strong></a>
-      <a href="products.html">สินค้าทั้งหมด</a>
-      <a href="sell.html">ลงประกาศขาย</a>
-      <a href="mylistings.html">รายการของฉัน</a>
-    </nav>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Student Market</a>
+      <nav>
+        <a href="products.html">สินค้าทั้งหมด</a>
+        <a href="sell.html">ลงประกาศขาย</a>
+        <a href="mylistings.html" class="active">รายการของฉัน</a>
+      </nav>
+    </div>
   </header>
-  <main>
-    <h1>รายการของฉัน</h1>
-    
-    <section>
-      <h2>ประกาศที่ฉันลงขาย</h2>
-      <div id="my-listings-grid" class="product-grid">
-        <p class="loading">ยังไม่มีประกาศของคุณ</p>
+
+  <main class="main-container">
+    <section class="content-card">
+      <h1>ประกาศขายของฉัน</h1>
+      <p class="subtext">จัดการสถานะสินค้า (ทำเครื่องหมาย "ขายแล้ว" หรือลบประกาศ)</p>
+      <div id="my-products-grid" class="products-grid">
+        <!-- Render ด้วย JS -->
       </div>
     </section>
-    
-    <section>
-      <h2>รายการที่สนใจ (Wishlist)</h2>
-      <div id="wishlist-grid" class="product-grid">
-        <p class="loading">ยังไม่มีรายการที่สนใจ</p>
+
+    <section class="content-card" style="margin-top: 2rem;">
+      <h1>รายการที่สนใจ (Wishlist)</h1>
+      <div id="wishlist-grid" class="products-grid">
+        <!-- Render ด้วย JS -->
       </div>
     </section>
   </main>
+
   <footer>
-    <p>&copy; 2026 Student Market</p>
+    <p>&copy; 2026 Student Market - Smart Campus Project</p>
   </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>
