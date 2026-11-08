@@ -1,504 +1,82 @@
 :root {
-  --primary: #0d9488;         
-  --primary-hover: #0f766e;   
-  --bg-main: #f8fafc;         
-  --card-bg: #ffffff;         
-  --text-main: #1e293b;     
-  --text-light: #64748b;     
-  --border-color: #e2e8f0;   
-  --radius-lg: 20px;       
-  --radius-sm: 10px;      
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --primary-color: #0d9488;
+  --primary-hover: #0f766e;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-tag: #ccfbf1;
+  --accent-tag-text: #0f766e;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 12px;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
 
-body {
-  font-family: "Anuphan", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+/* Navbar */
+.navbar { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 0; position: sticky; top:0; z-index: 100; }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+.logo { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+nav a { margin-left: 1.5rem; text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
+nav a:hover, nav a.active { color: var(--primary-color); }
 
-header {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+/* Main Container & Layout */
+.main-container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+.hero-banner { background: var(--card-bg); border-radius: var(--radius); padding: 3rem 2rem; text-align: center; margin-bottom: 2rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.hero-banner h1 { font-size: 2.2rem; color: var(--text-main); margin-bottom: 0.5rem; }
+.hero-banner p { color: var(--text-muted); margin-bottom: 1.5rem; }
 
-nav[aria-label="เมนูหลัก"] {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+.content-card { background: var(--card-bg); border-radius: var(--radius); padding: 1.8rem; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.section-title { font-size: 1.4rem; color: var(--primary-color); position: relative; padding-bottom: 0.3rem; }
 
-/* ดันลิงก์แรก (Student Market) ให้อยู่ทางซ้ายสุด และดันเมนูที่เหลือทั้งหมดไปชิดขวา */
-nav[aria-label="เมนูหลัก"] > a:first-child {
-  margin-right: auto;
-}
+/* Grid Layout */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
 
-nav[aria-label="เมนูหลัก"] a {
-  color: var(--text-light);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
+/* Product Card Component */
+.product-card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border-color); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; position: relative; display: flex; flex-direction: column; }
+.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.product-card.sold-out { opacity: 0.55; filter: grayscale(40%); }
+.card-img-box { position: relative; height: 180px; width: 100%; background: #e2e8f0; overflow: hidden; }
+.card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+.card-tag { position: absolute; top: 10px; left: 10px; background: var(--primary-color); color: #fff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+.fav-btn { position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+.fav-btn.active { color: #e11d48; }
 
-nav[aria-label="เมนูหลัก"] a:hover,
-nav[aria-label="เมนูหลัก"] a strong {
-  color: var(--primary);
-}
+.card-body { padding: 1rem; display: flex; flex-direction: column; flex-grow: 1; }
+.card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
+.card-price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.card-price { font-size: 1.2rem; font-weight: 800; color: var(--primary-color); }
+.card-condition { background: #f1f5f9; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: var(--text-muted); }
+.card-location { font-size: 0.825rem; color: var(--text-muted); margin-top: auto; }
 
-nav[aria-label="เมนูหลัก"] label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
+.badge-sold { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: bold; font-size: 1.1rem; z-index: 2; }
 
-/* ===== 2. Main Layout ===== */
-main {
-  max-width: 1200px;
-  width: 100%;
-  margin: 40px auto;
-  padding: 0 24px;
-  flex: 1;
-}
+/* Filter & Form Styles */
+.filter-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; background: #f8fafc; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; }
+.filter-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.filter-group label { font-size: 0.85rem; font-weight: 600; }
+input, select, textarea { padding: 0.6rem 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.95rem; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary-color); border-color: transparent; }
 
-h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: -0.02em;
-}
+.sell-page-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 768px) { .sell-page-grid { grid-template-columns: 1fr; } }
 
-h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--text-main);
-}
+.form-group { margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.error-msg { color: #dc2626; font-size: 0.8rem; height: 1rem; }
+.req { color: #dc2626; }
+.radio-group { display: flex; gap: 1rem; }
 
-p {
-  margin-bottom: 16px;
-}
+/* Buttons */
+.btn { display: inline-block; padding: 0.6rem 1.2rem; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.btn-primary { background: var(--primary-color); color: white; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-danger { background: #ef4444; color: white; }
+.btn-secondary { background: #e2e8f0; color: var(--text-main); }
+.center-btn { text-align: center; margin-top: 1.5rem; }
+.link-more { color: #6366f1; text-decoration: none; font-weight: 600; }
 
-/* ===== 3. Sections & Containers ===== */
-section {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  margin-bottom: 32px;
-  box-shadow: var(--shadow);
-}
-
-/* ===== 4. Forms & Inputs ===== */
-form {
-  display: grid;
-  gap: 20px;
-}
-
-form p {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 0;
-}
-
-label {
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="search"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  font-family: inherit;
-  font-size: 1rem;
-  background: #fff;
-  color: var(--text-main);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
-}
-
-fieldset {
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  display: flex;
-  gap: 24px;
-  background: #fff;
-}
-
-legend {
-  font-weight: 600;
-  padding: 0 8px;
-  color: var(--text-main);
-}
-
-fieldset label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-/* ===== 5. Buttons ===== */
-button[type="submit"],
-.btn-main {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-family: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
-}
-
-button[type="submit"]:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.35);
-}
-
-button[type="reset"] {
-  background-color: transparent;
-  color: var(--text-light);
-  border: 1px solid var(--border-color);
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-family: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-button[type="reset"]:hover {
-  background-color: var(--border-color);
-  color: var(--text-main);
-}
-
-/* ===== 6. Product Grid & Cards ===== */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
-  margin-top: 20px;
-}
-
-.product,
-.product-card {
-  background: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-}
-
-.product:hover,
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-
-.card-img-wrap {
-  position: relative;
-  width: 100%;
-  height: 180px;
-  background: var(--border-color);
-  overflow: hidden;
-}
-
-.product img,
-.card-img-wrap img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-}
-
-.card-body {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
-.category-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 4px 8px;
-  background: #f1f5f9;
-  color: var(--text-light);
-  border-radius: 4px;
-  width: fit-content;
-}
-
-.card-title,
-.product h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-.card-title a,
-.product h3 a {
-  color: var(--text-main);
-  text-decoration: none;
-}
-
-.card-title a:hover,
-.product h3 a:hover {
-  color: var(--primary);
-}
-
-.card-price,
-.price {
-  font-weight: 700;
-  color: var(--primary);
-  font-size: 1.15rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.condition-badge {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-light);
-  background: #f1f5f9;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.card-location, 
-.card-time {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin: 0;
-}
-
-.wishlist-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #fbbf24;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.wishlist-btn:hover {
-  transform: scale(1.1);
-}
-
-.good-price-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #10b981;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-.sold-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #ef4444;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-/* ===== 7. Footer ===== */
-footer {
-  text-align: center;
-  padding: 24px;
-  border-top: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
-
-/* ===== 8. Index Page Header & Category Dropdown (เพิ่มใหม่) ===== */
-.section-header-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.section-header-flex h2 {
-  margin-bottom: 0;
-}
-
-.category-dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.category-btn {
-  background: #f1f5f9;
-  color: var(--text-main);
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.category-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-
-.category-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background: #ffffff;
-  min-width: 180px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  z-index: 100;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-/* เมื่อเอาเมาส์ชี้ให้แสดงดรอปดาวน์หมวดหมู่ */
-.category-dropdown:hover .category-menu {
-  display: block;
-}
-
-.category-menu a {
-  color: var(--text-main);
-  padding: 10px 16px;
-  text-decoration: none;
-  display: block;
-  font-size: 0.9rem;
-  transition: background 0.15s, color 0.15s;
-}
-
-.category-menu a:hover {
-  background: #f0fdfa;
-  color: var(--primary);
-}
-
-/* ระบบตัวกรองเดิมที่อาจมีค้างไว้ */
-.category-filters {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.category-filters-label {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-.category-filter-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  font-weight: 400;
-}
-
-.margin-top-lg {
-  margin-top: 24px;
-}
-
-/* ===== 9. Responsive Design ===== */
-@media (max-width: 768px) {
-  nav[aria-label="เมนูหลัก"] {
-    height: auto;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  section {
-    padding: 20px;
-  }
-  
-  fieldset {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-}
+footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 3rem; }
