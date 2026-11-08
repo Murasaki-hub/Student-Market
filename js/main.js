@@ -199,7 +199,7 @@ function setupGlobalEvents() {
 
 // 4.1 หน้าแรก (index.html)
 async function renderIndexPage() {
-  const container = document.getElementById('latest-products');
+  const container = document.querySelector('#latest-products');
   if (!container) return;
 
   const products = await fetchAllProducts();
@@ -218,18 +218,18 @@ async function renderIndexPage() {
 
 // 4.2 หน้าสินค้าทั้งหมด (products.html - Filter & Search)
 async function renderProductsPage() {
-  const container = document.getElementById('product-grid');
+  const container = document.querySelector('#product-grid');
   if (!container) return;
 
   const allProducts = await fetchAllProducts();
-  const form = document.getElementById('filter-form');
-  const searchInput = document.getElementById('search-input');
-  const catSelect = document.getElementById('category-select');
-  const condSelect = document.getElementById('condition-select');
-  const minInput = document.getElementById('min-price');
-  const maxInput = document.getElementById('max-price');
-  const sortSelect = document.getElementById('sort-select');
-  const resultCount = document.getElementById('result-count');
+  const form = document.querySelector('#filter-form');
+  const searchInput = document.querySelector('#search-input');
+  const catSelect = document.querySelector('#category-select');
+  const condSelect = document.querySelector('#condition-select');
+  const minInput = document.querySelector('#min-price');
+  const maxInput = document.querySelector('#max-price');
+  const sortSelect = document.querySelector('#sort-select');
+  const resultCount = document.querySelector('#result-count');
 
   // อ่าน Query String จาก URL เช่น ?category=อุปกรณ์การเรียน
   const urlParams = new URLSearchParams(window.location.search);
@@ -276,7 +276,7 @@ async function renderProductsPage() {
 
 // 4.3 หน้ารายละเอียดสินค้า (product.html)
 async function renderDetailPage() {
-  const container = document.getElementById('product-detail-container');
+  const container = document.querySelector('#product-detail-container');
   if (!container) return;
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -317,12 +317,12 @@ async function renderDetailPage() {
 
 // 4.4 หน้าลงประกาศ (sell.html - Real-time Preview & FileReader)
 function renderSellPage() {
-  const form = document.getElementById('sell-form');
-  const previewBox = document.getElementById('preview-card');
+  const form = document.querySelector('#sell-form');
+  const previewBox = document.querySelector('#preview-card');
   if (!form || !previewBox) return;
 
   let imageBase64 = '';
-  const imgInput = document.getElementById('image-file');
+  const imgInput = document.querySelector('#image-file');
 
   // อ่านไฟล์รูปด้วย FileReader
   if (imgInput) {
@@ -364,7 +364,7 @@ function renderSellPage() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const errorMsg = document.getElementById('error-message');
+    const errorMsg = document.querySelector('#error-message');
     const formData = new FormData(form);
 
     if (!form.checkValidity()) {
@@ -398,8 +398,8 @@ function renderSellPage() {
 
 // 4.5 หน้ารายการของฉัน & สินค้าที่สนใจ (mylistings.html)
 async function renderMyListingsPage() {
-  const myGrid = document.getElementById('my-listings-grid');
-  const wishGrid = document.getElementById('wishlist-grid');
+  const myGrid = document.querySelector('#my-listings-grid');
+  const wishGrid = document.querySelector('#wishlist-grid');
   if (!myGrid && !wishGrid) return;
 
   const allProducts = await fetchAllProducts();
