@@ -127,7 +127,6 @@ function createProductCard(product, allProducts, mode = 'normal') {
 
 function setupGlobalEvents() {
   document.addEventListener('click', (e) => {
-    // ปุ่ม Wishlist (ดาว/หัวใจ)
     if (e.target.classList.contains('wishlist-btn')) {
       const id = e.target.dataset.id;
       let wishlist = loadStorage(LOCAL_WISH_KEY, []);
