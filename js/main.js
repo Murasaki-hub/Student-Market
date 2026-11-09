@@ -202,6 +202,8 @@ async function renderProductsPage() {
   const maxInput = document.querySelector('#max-price');
   const sortSelect = document.querySelector('#sort-select');
   const resultCount = document.querySelector('#result-count');
+const button = document.querySelector('.btn-main');
+button.style.backgroundcolor = 'red';
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('category')) {
