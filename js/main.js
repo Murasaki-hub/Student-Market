@@ -203,7 +203,7 @@ async function renderProductsPage() {
   const sortSelect = document.querySelector('#sort-select');
   const resultCount = document.querySelector('#result-count');
 const button = document.querySelector('.btn-main');
-button.style.backgroundcolor = 'red';
+button.style.fontSize = '32px';
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('category')) {
