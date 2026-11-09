@@ -1,4 +1,4 @@
-const JSON_URL = 'Data/products.json';
+koo is itconst JSON_URL = 'Data/products.json';
 const LOCAL_MINE_KEY = 'sm-mine';
 const LOCAL_WISH_KEY = 'sm-wish';
 
@@ -202,8 +202,6 @@ async function renderProductsPage() {
   const maxInput = document.querySelector('#max-price');
   const sortSelect = document.querySelector('#sort-select');
   const resultCount = document.querySelector('#result-count');
-const button = document.querySelector('.btn-main');
-button.style.fontSize = '32px';
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('category')) {
