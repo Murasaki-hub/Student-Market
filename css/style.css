@@ -340,8 +340,8 @@ button[type="reset"]:hover {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #10b981;
-  color: white;
+  background: blue;
+  color: red;
   font-size: 0.75rem;
   font-weight: 600;
   padding: 4px 8px;
