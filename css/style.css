@@ -172,7 +172,7 @@ fieldset label {
 
 button[type="submit"],
 .btn-main {
-  background-color: blue;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 12px 28px;
