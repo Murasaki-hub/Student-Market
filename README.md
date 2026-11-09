@@ -37,6 +37,8 @@ F6 รายการทีสนใจ (wishlist) บันทึกด้ว�
 <img width="200" height="200" alt="Screenshot 2026-11-08 223421" src="https://github.com/user-attachments/assets/ebe9487e-933d-4fdf-a249-bf245466611c" />
 <img width="200" height="200" alt="Screenshot 2026-11-08 223456" src="https://github.com/user-attachments/assets/f66cd03e-043a-4f6e-b478-a247c677f2f3" />
 
+# Wireframe
+https://canva.link/8ncbe9kac98yitu
 
 
 
